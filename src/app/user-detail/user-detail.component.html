@@ -30,6 +30,7 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Refresh Rate (seconds)</mat-label>
           <input matInput type="number" [(ngModel)]="user.refresh_rate" name="refresh_rate" required />
+          <mat-hint align="start">86400 seconds = once per day</mat-hint>
         </mat-form-field>
     
         <div class="edit-actions">
@@ -54,18 +55,38 @@
           {{ config.city | titlecase }} - €{{ config.min_price }} to €{{ config.max_price }}
         </mat-panel-title>
       </mat-expansion-panel-header>
+  
       <div class="expansion-details">
+  
+        <div class="config-status">
+          <span class="status-badge" [ngClass]="config.enabled ? 'enabled' : 'disabled'">
+            {{ config.enabled ? 'Enabled' : 'Disabled' }}
+          </span>
+        </div>
+  
         <p><strong>Bedrooms:</strong> {{ config.min_bedrooms }}</p>
         <p><strong>Surface Area:</strong> {{ config.min_surface_area }} m²</p>
-        <p><strong>Enabled:</strong> {{ config.enabled ? 'Yes' : 'No' }}</p>
         <p><strong>Created At:</strong> {{ config.created_at | date }}</p>
         <p><strong>Last Scraped:</strong> {{ config.last_scraped_at ? (config.last_scraped_at | date:'medium') : 'Never' }}</p>
         <p><strong>Listings Sent:</strong> {{ config.listing_count }}</p>
         <p><strong>Emails Sent:</strong> {{ config.emails_sent_count }}</p>
-        <button mat-button color="warn" (click)="deleteConfig(config.id)">Delete</button>
+  
+        <div class="edit-actions">
+          <button
+            mat-button
+            [color]="config.enabled ? 'warn' : 'primary'"
+            (click)="toggleConfigEnable(config.id, config.enabled)">
+            {{ config.enabled ? 'Disable' : 'Enable' }}
+          </button>
+        
+          <button mat-button color="warn" (click)="deleteConfig(config.id)">
+            Delete
+          </button>
+        </div>        
       </div>
     </mat-expansion-panel>
-  </mat-accordion>  
+  </mat-accordion>
+  
 
   <div class="toggle-button-container">
     <button mat-raised-button color="primary" (click)="isAddingConfig = !isAddingConfig">

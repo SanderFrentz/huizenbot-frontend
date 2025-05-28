@@ -43,4 +43,8 @@ export class UserService {
     return this.http.delete(`${this.apiUrl}/users/${userId}`);
   }
 
+  toggleSearchConfigEnabled(configId: number, enabled: boolean): Observable<any> {
+    return this.http.post(`${this.apiUrl}/search-configs/${configId}/enabled`, { enabled });
+  }
+
 }

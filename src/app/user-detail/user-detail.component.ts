@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatInputModule,
     MatExpansionModule,
+    MatButtonModule,
     FormsModule
   ],
   templateUrl: './user-detail.component.html',
@@ -84,6 +86,18 @@ export class UserDetailComponent implements OnInit {
     this.userService.deleteSearchConfig(configId).subscribe(() => {
       this.searchConfigs = this.searchConfigs.filter(c => c.id !== configId);
     });
+  }
+
+  toggleConfigEnable(configId: number, currentValue: boolean) {
+    this.userService.toggleSearchConfigEnabled(configId, !currentValue).subscribe({
+      next: (res) => {
+        alert('Config updated:');
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error('Error updating config:', err);
+      }
+    })
   }
 
   sanitizeNumber(value: number | null): number {

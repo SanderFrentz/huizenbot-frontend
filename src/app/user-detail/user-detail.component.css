@@ -200,3 +200,26 @@ mat-card-content button {
     width: 100%;
   }
 }
+
+/* Config Status Badge */
+.config-status {
+  margin-bottom: 0.75rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: white;
+}
+
+.status-badge.enabled {
+  background-color: #4caf50;
+}
+
+.status-badge.disabled {
+  background-color: #f44336;
+}
+
