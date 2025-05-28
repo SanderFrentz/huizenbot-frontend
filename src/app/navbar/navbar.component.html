@@ -1,0 +1,10 @@
+<nav class="navbar">
+    <div class="navbar-left" (click)="goToUsers()">
+      <span class="logo-text">HuizenBot <strong>ADMIN</strong></span>
+    </div>
+  
+    <div class="navbar-right" *ngIf="auth.isLoggedIn()">
+      <button class="logout-button" (click)="logout()">logout →</button>
+    </div>
+  </nav>
+  

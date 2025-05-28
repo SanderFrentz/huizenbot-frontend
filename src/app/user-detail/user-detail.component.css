@@ -1,0 +1,202 @@
+.user-details-container {
+  padding: 1.5rem;
+}
+
+/* Toolbar */
+mat-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.navigate-arrow {
+  margin-right: 0.75rem;
+}
+
+.navigate_arrow {
+  margin: 1%;
+}
+
+.toolbar-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+/* User Info Card */
+.user-card {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-email {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.detail-line {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Expansion Panel */
+.expansion-details {
+  padding-left: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.expansion-details p {
+  margin: 0.25rem 0;
+}
+
+/* Section Headers */
+.section-header {
+  margin: 1.25rem 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #444;
+}
+
+/* Top buttons */
+.user-action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.user-action-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: none;
+  border: 1px solid #dcdcdc;
+  background-color: #ffffff;
+  color: #1976d2;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+.user-action-buttons button:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Save/Delete Buttons */
+.edit-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.edit-actions button {
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  text-transform: none;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+/* Save Button (Green) */
+.edit-actions button[color='primary'] {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.edit-actions button[color='primary']:hover {
+  background-color: #43a047;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Delete Button (Red) */
+.edit-actions button[color='warn'] {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.edit-actions button[color='warn']:hover {
+  background-color: #d32f2f;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form field sizing */
+mat-form-field.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Buttons inside card forms */
+mat-card-content button {
+  margin-top: 0.5rem;
+}
+
+/* Toggle Add Config Button */
+.toggle-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-right: 1rem;
+}
+
+.toggle-button-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  padding: 0.6rem 1.6rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-transform: none;
+  background-color: white;
+  color: #1976d2;
+  font-size: 0.95rem;
+  border: 1px solid #dcdcdc;
+  transition: background-color 0.2s ease-in-out;
+  margin-bottom: 2%;
+}
+
+.toggle-button-container button mat-icon {
+  margin-right: 0.5rem;
+}
+
+.toggle-button-container button:hover {
+  background-color: #f0f0f0;
+}
+
+.add_title {
+  margin: 2%;
+}
+
+@media (max-width: 768px) {
+  .title {
+    margin: 5%;
+  }
+
+  .user-action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .edit-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .edit-actions button,
+  .user-action-buttons button {
+    width: 100%;
+  }
+}

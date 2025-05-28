@@ -1,0 +1,119 @@
+<mat-toolbar color="primary">
+  <span>Users</span>
+</mat-toolbar>
+
+<!-- Responsive table for large screens -->
+<div class="table-container desktop-only">
+  <table mat-table [dataSource]="users" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email_to">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let user">{{ user.email_to }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="refresh_rate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Refresh Rate</th>
+      <td mat-cell *matCellDef="let user">{{ user.refresh_rate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-button color="accent" (click)="viewUser(user.id)">View</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['id', 'email_to', 'refresh_rate', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id', 'email_to', 'refresh_rate', 'actions'];"></tr>
+  </table>
+</div>
+
+<!-- Card list for mobile -->
+<div class="mobile-only user-cards">
+  <mat-card class="user-card" *ngFor="let user of users">
+    <mat-card-title class="title">{{ user.email_to }}</mat-card-title>
+    <mat-card-content>
+      <p><strong>ID:</strong> {{ user.id }}</p>
+      <p><strong>Refresh Rate:</strong> {{ user.refresh_rate }}s</p>
+      <p><strong>Search configs:</strong> {{ user.config_count }}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button color="accent" (click)="viewUser(user.id)">View</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="toggle-button-container">
+  <button mat-raised-button color="primary" (click)="showForm = !showForm">
+    <mat-icon>{{ showForm ? 'close' : 'person_add' }}</mat-icon>
+    {{ showForm ? 'Cancel' : 'Add New User' }}
+  </button>
+</div>
+
+<div class="add_user_container">
+<mat-card *ngIf="showForm">
+  <mat-card-title class="title">Add Search Configuration</mat-card-title>
+  <mat-card-content>
+
+<form #configForm="ngForm" (ngSubmit)="addUser()" class="form-container">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="newUser.email_to" name="email" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Refresh rate</mat-label>
+    <input matInput [(ngModel)]="newUser.refresh_rate" name="refresh_rate" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>City</mat-label>
+    <input matInput [(ngModel)]="newConfig.city" name="city" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Min Price</mat-label>
+    <input matInput type="number" [(ngModel)]="newConfig.min_price" name="min_price" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Max Price</mat-label>
+    <input matInput type="number" [(ngModel)]="newConfig.max_price" name="max_price" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Min bedrooms</mat-label>
+    <input matInput type="number" [(ngModel)]="newConfig.min_bedrooms" name="min_bedrooms" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Min Surface Area (m²)</mat-label>
+    <input matInput type="number" [(ngModel)]="newConfig.min_surface_area" name="min_surface_area" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="configForm.invalid">
+    Add
+  </button>
+</form>
+</mat-card-content>
+</mat-card>
+</div>
+<!-- <form *ngIf="showForm" [formGroup]="userForm" (ngSubmit)="addUser()" class="form-container">
+  <mat-card>
+    <mat-card-title class="title">Add New User + Search Config</mat-card-title>
+    <mat-card-content>
+  
+      
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" type="submit" [disabled]="userForm.invalid">
+        <mat-icon>add</mat-icon>
+        Add
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form> -->

@@ -1,0 +1,112 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="navigate-arrow" (click)="goBack()" aria-label="Back to users">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="toolbar-title">User Details</span>
+</mat-toolbar>
+
+<div class="user-details-container" *ngIf="user">
+  <div class="user-action-buttons">
+    <button mat-stroked-button (click)="isEditingUser = !isEditingUser">
+      <mat-icon>{{ isEditingUser ? 'close' : 'edit' }}</mat-icon>
+      {{ isEditingUser ? 'Cancel Edit' : 'Edit User' }}
+    </button>
+  </div>
+
+  <mat-card class="user-card">
+    <mat-card-title *ngIf="!isEditingUser">{{ user.email_to }}</mat-card-title>
+
+    <mat-card-content *ngIf="!isEditingUser">
+      <p class="detail-line"><strong>Refresh Rate:</strong> {{ user.refresh_rate }} seconds</p>
+    </mat-card-content>
+
+    <ng-container *ngIf="isEditingUser">
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="user.email_to" name="email_to" required />
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Refresh Rate (seconds)</mat-label>
+          <input matInput type="number" [(ngModel)]="user.refresh_rate" name="refresh_rate" required />
+        </mat-form-field>
+    
+        <div class="edit-actions">
+          <button mat-raised-button color="primary" (click)="updateUser()">
+            <mat-icon>save</mat-icon> Save
+          </button>
+          <button mat-raised-button color="warn" (click)="deleteUser()">
+            <mat-icon>delete</mat-icon> Delete user
+          </button>
+        </div>        
+      </mat-card-content>
+    </ng-container>
+    
+  </mat-card>
+
+  <h2 class="section-header">Search configurations:</h2>
+
+  <mat-accordion *ngIf="searchConfigs">
+    <mat-expansion-panel *ngFor="let config of searchConfigs">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ config.city | titlecase }} - €{{ config.min_price }} to €{{ config.max_price }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="expansion-details">
+        <p><strong>Bedrooms:</strong> {{ config.min_bedrooms }}</p>
+        <p><strong>Surface Area:</strong> {{ config.min_surface_area }} m²</p>
+        <p><strong>Enabled:</strong> {{ config.enabled ? 'Yes' : 'No' }}</p>
+        <p><strong>Created At:</strong> {{ config.created_at | date }}</p>
+        <p><strong>Last Scraped:</strong> {{ config.last_scraped_at ? (config.last_scraped_at | date:'medium') : 'Never' }}</p>
+        <p><strong>Listings Sent:</strong> {{ config.listing_count }}</p>
+        <p><strong>Emails Sent:</strong> {{ config.emails_sent_count }}</p>
+        <button mat-button color="warn" (click)="deleteConfig(config.id)">Delete</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>  
+
+  <div class="toggle-button-container">
+    <button mat-raised-button color="primary" (click)="isAddingConfig = !isAddingConfig">
+      <mat-icon>{{ isAddingConfig ? 'close' : 'add_circle' }}</mat-icon>
+      {{ isAddingConfig ? 'Cancel Add Config' : 'Add New Config' }}
+    </button>
+  </div>
+
+  <mat-card *ngIf="isAddingConfig">
+    <mat-card-title class="title">Add Search Configuration</mat-card-title>
+    <mat-card-content>
+      <form #configForm="ngForm" (ngSubmit)="addConfig()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>City</mat-label>
+          <input matInput [(ngModel)]="newConfig.city" name="city" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Min Price</mat-label>
+          <input matInput type="number" [(ngModel)]="newConfig.min_price" name="min_price" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Max Price</mat-label>
+          <input matInput type="number" [(ngModel)]="newConfig.max_price" name="max_price" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Min bedrooms</mat-label>
+          <input matInput type="number" [(ngModel)]="newConfig.min_bedrooms" name="min_bedrooms" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Min Surface Area (m²)</mat-label>
+          <input matInput type="number" [(ngModel)]="newConfig.min_surface_area" name="min_surface_area" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="configForm.invalid">
+          Add
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
